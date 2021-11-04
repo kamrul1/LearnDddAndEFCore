@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1BA97AF8-0BAB-4862-8A83-05E9A79BE5D3}"
+	ProjectSection(SolutionItems) = preProject
+		build\Database-initial.sql = build\Database-initial.sql
+		build\README.md = build\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D4EBBCD9-5112-43D5-92D6-A163A1F5139F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{70AAC4EE-3D7D-4575-BC7A-E1E099E70501}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F} = {D4EBBCD9-5112-43D5-92D6-A163A1F5139F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2DB5F14-702D-4E98-8B35-4351971BE434}
+	EndGlobalSection
+EndGlobal

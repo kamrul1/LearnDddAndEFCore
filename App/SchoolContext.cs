@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,39 @@ namespace App
 {
     public sealed class SchoolContext: DbContext
     {
+        private readonly string connectionString;
+        private readonly bool useConsoleLogger;
+
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
 
-        public SchoolContext(DbContextOptions<SchoolContext> options): base(options)
+        public SchoolContext(string connectionString, bool useConsoleLogger)
         {
+            this.connectionString = connectionString;
+            this.useConsoleLogger = useConsoleLogger;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            ILoggerFactory loggerFatory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddFilter((category, level) =>
+                        category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
+                    .AddConsole();
+
+            });
+
+            optionsBuilder
+                .UseSqlServer(connectionString);
+
+            if (useConsoleLogger)
+            {
+                optionsBuilder
+                .UseLoggerFactory(loggerFatory)
+                .EnableSensitiveDataLogging();
+            }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

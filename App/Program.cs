@@ -10,16 +10,12 @@ namespace App
         static void Main(string[] args)
         {
             string connectionString = GetConnectionString();
-            ILoggerFactory loggerFatory = CreateLoggerFactory();
 
 
-            var optionsBuilder = new DbContextOptionsBuilder<SchoolContext>();
-            optionsBuilder
-                .UseSqlServer(connectionString)
-                .UseLoggerFactory(loggerFatory)
-                .EnableSensitiveDataLogging();
+            bool useConsoleLogger = true; //IHostingEnvironment.IsDevelopment();
 
-            using (var context = new SchoolContext(optionsBuilder.Options))
+
+            using (var context = new SchoolContext(connectionString, useConsoleLogger))
             {
                 Student student = context.Students.Find(1L);
 
@@ -30,17 +26,6 @@ namespace App
             }
         }
 
-        private static ILoggerFactory CreateLoggerFactory()
-        {
-            return LoggerFactory.Create(builder =>
-            {
-                builder
-                    .AddFilter((category, level) =>
-                        category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
-                    .AddConsole();
-
-            });
-        }
 
         private static string GetConnectionString()
         {

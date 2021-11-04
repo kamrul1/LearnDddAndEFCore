@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,11 @@ namespace App
 
             using (var context = new SchoolContext(connectionString, true))
             {
-                Student student = context.Students.Find(1L);
+                //Student student = context.Students.Find(1L);
+
+                Student student = context.Students
+                    .Include(x => x.FavoriteCourse)
+                    .SingleOrDefault(x => x.Id == 1);
             }
         }
 

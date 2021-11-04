@@ -34,7 +34,8 @@ namespace App
             });
 
             optionsBuilder
-                .UseSqlServer(connectionString);
+                .UseSqlServer(connectionString)
+                .UseLazyLoadingProxies();
 
             if (useConsoleLogger)
             {

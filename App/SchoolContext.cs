@@ -53,7 +53,7 @@ namespace App
                 x.Property(p => p.Id).HasColumnName("StudentID");
                 x.Property(p => p.Email);
                 x.Property(p => p.Name);
-                x.Property(p => p.FavoriteCourseId);
+                x.HasOne(p => p.FavoriteCourse).WithMany();
             });
 
             modelBuilder.Entity<Course>(x =>

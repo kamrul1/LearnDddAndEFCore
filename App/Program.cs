@@ -12,17 +12,9 @@ namespace App
             string connectionString = GetConnectionString();
 
 
-            bool useConsoleLogger = true; //IHostingEnvironment.IsDevelopment();
-
-
-            using (var context = new SchoolContext(connectionString, useConsoleLogger))
+            using (var context = new SchoolContext(connectionString, true))
             {
                 Student student = context.Students.Find(1L);
-
-                student.Name += "2";
-                student.Email += "2";
-
-                context.SaveChanges();
             }
         }
 

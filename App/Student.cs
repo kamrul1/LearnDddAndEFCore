@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace App
 {
-    public class Student
+    public class Student: Entity
     {
-        public long Id { get; private set; }
         public string Name { get; private set; }
         public string Email { get; private set; }
         public virtual Course FavoriteCourse{ get; private set; }

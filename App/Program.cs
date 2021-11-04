@@ -18,8 +18,16 @@ namespace App
                 //Student student = context.Students.Find(1L);
 
                 Student student = context.Students
-                    .Include(x => x.FavoriteCourse)
-                    .SingleOrDefault(x => x.Id == 1);
+                    .Find(1L);
+
+                Course course = student.FavoriteCourse;
+
+                Course course2 = context.Courses.SingleOrDefault(x => x.Id == 2);
+
+                bool b = course2 == course;
+
+                bool b2 = course == Course.Chemistry;
+
             }
         }
 

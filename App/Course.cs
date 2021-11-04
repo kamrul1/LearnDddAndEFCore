@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace App
 {
-    public class Course
+    public class Course:Entity
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
+        public static readonly Course Calculus = new Course(1, "Caculus");
+        public static readonly Course Chemistry = new Course(2, "Chemistry");
+
+
+        protected Course()
+        {
+
+        }
+
+        private Course(long id, string name) : base(id)
+        {
+            this.Name = name;
+        }
+
+        public string Name { get;}
     }
 }

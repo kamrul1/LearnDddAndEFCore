@@ -253,7 +253,7 @@ This is like above, but when value isn't 0, it will use the modified method.  Al
 
 - No identity
 - Immutable: Better encapsulation
-
+ 
 
 
 

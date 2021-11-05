@@ -10,10 +10,12 @@ namespace App
     public sealed class StudentController
     {
         private readonly SchoolContext context;
+        private readonly StudentRepository studentRepository;
 
         public StudentController(SchoolContext context)
         {
             this.context = context;
+            this.studentRepository = new StudentRepository(context);
         }
 
         public string CheckStudentFavoriteCourse(long studentId, long courseId)
@@ -38,13 +40,7 @@ namespace App
 
         public string EnrollStudent(long studentId, long courseId, Grade grade)
         {
-            //Student student = context.Students
-            //        .Include(x => x.Enrollments)
-            //        .Single(x => x.Id == studentId);   
-
-            Student student = context.Students.Find(studentId);
-            context.Entry(student).Collection(x => x.Enrollments).Load();
-      
+            var student = studentRepository.GetById(studentId);
 
             if (student is null)
             {

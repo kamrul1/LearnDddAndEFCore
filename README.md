@@ -230,6 +230,10 @@ Student student = context.Students.Find(studentId);
 context.Entry(student).Collection(x => x.Enrollments).Load();
 ```
 
+Use a repository to hide complexity.  This is not always needed with EFCore as they don't always add value.
+
+
+
 
 
 

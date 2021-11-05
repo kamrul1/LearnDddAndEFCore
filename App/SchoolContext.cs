@@ -55,6 +55,8 @@ namespace App
                 x.Property(p => p.Email);
                 x.Property(p => p.Name);
                 x.HasOne(p => p.FavoriteCourse).WithMany();
+                x.HasMany(p => p.Enrollments).WithOne(p => p.Student)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
 
             modelBuilder.Entity<Course>(x =>
@@ -62,6 +64,15 @@ namespace App
                 x.ToTable("Course").HasKey(k => k.Id);
                 x.Property(p => p.Id).HasColumnName("CourseID");
                 x.Property(p => p.Name);
+            });
+
+            modelBuilder.Entity<Enrollment>(x =>
+            {
+                x.ToTable("Enrollment").HasKey(k => k.Id);
+                x.Property(p => p.Id).HasColumnName("EnrollmentID");
+                x.HasOne(p => p.Student).WithMany(p => p.Enrollments);
+                x.HasOne(p => p.Course).WithMany();
+                x.Property(p => p.Grade);
             });
         }
 

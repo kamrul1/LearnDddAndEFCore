@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,24 +11,20 @@ namespace App
     {
         static void Main(string[] args)
         {
-            string connectionString = GetConnectionString();
+            string result2 = Execute(x => x.EnrollStudent(1, 2, Grade.A));
 
+            string result = Execute(x => x.CheckStudentFavoriteCourse(1, 2));
+
+        }
+
+        private static string Execute(Func<StudentController, string> func)
+        {
+            string connectionString = GetConnectionString();
 
             using (var context = new SchoolContext(connectionString, true))
             {
-                //Student student = context.Students.Find(1L);
-
-                Student student = context.Students
-                    .Find(1L);
-
-                Course course = student.FavoriteCourse;
-
-                Course course2 = context.Courses.SingleOrDefault(x => x.Id == 2);
-
-                bool b = course2 == course;
-
-                bool b2 = course == Course.Chemistry;
-
+                var controller = new StudentController(context);
+                return func(controller);
             }
         }
 

@@ -162,6 +162,60 @@ public abstract class Entity
 
 The ```GetRealType()``` method checks if proxies/LazyLoading and compares the basetype instead.
 
+---
+
+
+## One-to-many relationship
+
+Normally introduced as :
+```csharp
+public virtual ICollection<Enrollment> Enrollments { get; set; }
+```
+
+Add row added using:
+```csharp
+student.Enrollments.Add(
+    new Enrollment(course, student, grade));
+```
+
+However, this approach is does break encapsulation.  As it allows a to wide API surface area.
+
+Correct way to do it:\
+Use a backing field for the setter and public property for getter in the ```Student.cs```
+```csharp
+private readonly List<Enrollment> enrollments = new List<Enrollment>();
+public virtual IReadOnlyList<Enrollment> Enrollments
+{
+    get
+    {
+        return enrollments.ToList();
+    }
+}
+```
+In order to add enrollment, we need to provide a method like this in ```Student.cs```
+```csharp
+public void EnrollIn(Course course, Grade grade)
+{
+    var enroll = new Enrollment(course, this, grade);
+    enrollments.Add(enroll);
+}
+```
+Add a row added using:
+```csharp
+student.AddEnrollment(course, grade);
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

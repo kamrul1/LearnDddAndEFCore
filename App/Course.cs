@@ -11,6 +11,9 @@ namespace App
         public static readonly Course Calculus = new Course(1, "Caculus");
         public static readonly Course Chemistry = new Course(2, "Chemistry");
 
+        public static readonly Course[] AllCourses = { Calculus, Chemistry };
+
+        public string Name { get; }
 
         protected Course()
         {
@@ -22,6 +25,11 @@ namespace App
             this.Name = name;
         }
 
-        public string Name { get;}
+        public static Course FromId(long id)
+        {
+            return AllCourses.SingleOrDefault(x => x.Id == id);
+        }
+
+
     }
 }

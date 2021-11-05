@@ -38,9 +38,12 @@ namespace App
 
         public string EnrollStudent(long studentId, long courseId, Grade grade)
         {
-            Student student = context.Students
-                    .Include(x => x.Enrollments)
-                    .Single(x => x.Id == studentId);   
+            //Student student = context.Students
+            //        .Include(x => x.Enrollments)
+            //        .Single(x => x.Id == studentId);   
+
+            Student student = context.Students.Find(studentId);
+            context.Entry(student).Collection(x => x.Enrollments).Load();
       
 
             if (student is null)

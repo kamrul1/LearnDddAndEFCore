@@ -224,6 +224,12 @@ Student student = context.Students
         .Single(x => x.Id == studentId);   
 ```
 
+However, this method does not cache the response.  An alternative is to make to calls to the database:
+```csharp
+Student student = context.Students.Find(studentId);
+context.Entry(student).Collection(x => x.Enrollments).Load();
+```
+
 
 
 

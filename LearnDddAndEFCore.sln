@@ -7,14 +7,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1BA97AF8
 	ProjectSection(SolutionItems) = preProject
 		build\1_Database-initial.sql = build\1_Database-initial.sql
 		build\2_Enrollments.sql = build\2_Enrollments.sql
-		build\README.md = build\README.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D4EBBCD9-5112-43D5-92D6-A163A1F5139F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{70AAC4EE-3D7D-4575-BC7A-E1E099E70501}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "App\App.csproj", "{A2F7E384-DD86-47C3-817A-ED0CE9CABE9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

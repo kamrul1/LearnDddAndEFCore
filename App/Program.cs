@@ -11,7 +11,7 @@ namespace App
     {
         static void Main(string[] args)
         {
-            string result5 = Execute(x => x.EditPersonalInfo(1, "Carl 2", "carl@gmail.com", 1));
+            string result5 = Execute(x => x.EditPersonalInfo(1, "Carl", "carl2@gmail.com", 1));
 
             //string result4 = Execute(x => x.RegisterStudent("Carl", "carl@gmail.com", 2, Grade.B));
 

@@ -254,6 +254,16 @@ This is like above, but when value isn't 0, it will use the modified method.  Al
 - No identity
 - Immutable: Better encapsulation
  
+Use EF Core Value Converations:
+
+```csharp
+x.Property(p => p.Email)
+    .HasConversion(
+            p => p.Value, 
+            p => Email.Create(p).Value);
+```
+
+Note EF Core does not pass null value to the conversion.
 
 
 

@@ -180,8 +180,10 @@ student.Enrollments.Add(
 
 However, this approach is does break encapsulation.  As it allows a to wide API surface area.
 
+#### Encapsulate the enrollment collection
 Correct way to do it:\
-Use a backing field for the setter and public property for getter in the ```Student.cs```
+Use a backing field for the setter and public property for getter in the ```Student.cs```. 
+Make the collection readonly.
 ```csharp
 private readonly List<Enrollment> enrollments = new List<Enrollment>();
 public virtual IReadOnlyList<Enrollment> Enrollments
@@ -202,8 +204,33 @@ public void EnrollIn(Course course, Grade grade)
 ```
 Add a row added using:
 ```csharp
-student.AddEnrollment(course, grade);
+student.EnrollIn(course, grade);
 ```
+***For all one-to-many relationship.***  
+>The one on the self should be responsible for creation and deletion of it collection
+
+There is no need to add Enrollment to the DbSet<> in the Student Context as it's an internal entitie.  
+It's controlled by the aggregate route ```Student.cs```
+
+### Egar load collections
+
+Collection classes in backing field are not Lazy loaded by EFCore.  
+There are multiple ways to cause EFCore to load it. Here is an example 
+using [eager](https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/what-is-eager-loading-and-what-is-lazy-loading-and-what-is-n/) loading:
+
+```csharp
+Student student = context.Students
+        .Include(x => x.Enrollments)
+        .Single(x => x.Id == studentId);   
+```
+
+
+
+
+
+
+
+
 
 
 

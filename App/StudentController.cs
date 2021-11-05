@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,9 @@ namespace App
         public string EnrollStudent(long studentId, long courseId, Grade grade)
         {
             Student student = context.Students
-                    .Find(studentId);
+                    .Include(x => x.Enrollments)
+                    .Single(x => x.Id == studentId);   
+      
 
             if (student is null)
             {
@@ -52,11 +55,11 @@ namespace App
                 return "Course not found";
             }
 
-            student.EnrollIn(course, grade);
+            var result = student.EnrollIn(course, grade);
 
             context.SaveChanges();
 
-            return "OK";
+            return result;
 
         }
         

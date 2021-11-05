@@ -32,10 +32,16 @@ namespace App
             FavoriteCourse = favoriteCourse;
         }
 
-        public void EnrollIn(Course course, Grade grade)
+        public string EnrollIn(Course course, Grade grade)
         {
+            if (enrollments.Any(x => x.Course == course))
+            {
+                return $"Already enrolled in course '{course.Name}'";
+            }
             var enroll = new Enrollment(course, this, grade);
             enrollments.Add(enroll);
+
+            return "OK";
         }
     }
 }

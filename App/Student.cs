@@ -8,28 +8,24 @@ namespace App
 {
     public class Student: Entity
     {
-        public string Name { get; private set; }
-        public string Email { get; private set; }
-        public virtual Course FavoriteCourse{ get; private set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public virtual Course FavoriteCourse{ get; set; }
 
         private readonly List<Enrollment> enrollments = new List<Enrollment>();
-        public virtual IReadOnlyList<Enrollment> Enrollments
-        {
-            get
-            {
-                return enrollments.ToList();
-            }
-        }
+        public virtual IReadOnlyList<Enrollment> Enrollments => enrollments.ToList();
 
         protected Student()
         {
         }
 
-        public Student(string name, string email, Course favoriteCourse): this()
+        public Student(string name, string email, Course favoriteCourse, Grade favouriteCourseGrade): this()
         {
             Name = name;
             Email = email;
             FavoriteCourse = favoriteCourse;
+
+            EnrollIn(favoriteCourse, favouriteCourseGrade);
         }
 
         public string EnrollIn(Course course, Grade grade)
@@ -43,5 +39,19 @@ namespace App
 
             return "OK";
         }
+
+        public void Disenroll(Course course)
+        {
+            Enrollment enrollment = enrollments.FirstOrDefault(x => x.Course == course);
+
+            if(enrollment is null)
+            {
+                return;
+            }
+
+            enrollments.Remove(enrollment);
+        }
+
+
     }
 }

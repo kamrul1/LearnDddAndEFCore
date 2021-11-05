@@ -28,6 +28,11 @@ namespace App
 
             return student;
         }
-        
+
+        public void Save(Student student)
+        {
+            context.Students.Attach(student);
+        }
+
     }
 }

@@ -229,8 +229,39 @@ However, this method does not cache the response.  An alternative is to make to 
 Student student = context.Students.Find(studentId);
 context.Entry(student).Collection(x => x.Enrollments).Load();
 ```
-
+This does mean that we have to forgo Lazy Loading, in this scenario.
 Use a repository to hide complexity.  This is not always needed with EFCore as they don't always add value.
+Here the varient requirement is:
+```
+New requirement:
+Can't enroll a student into 
+the same course twice
+```
+
+## Disconnected Graphs of Objects
+
+>Attach method
+
+When EFCore attach method is used, it will look at the Id property for the object.  If it is default i.e. 0 it will
+use the add method.  If it's value isn't 0, it will use the unchanged method.
+
+>Update method
+
+This is like above, but when value isn't 0, it will use the modified method.  Always prefer Attach over Update or Add
+
+## Mapping Value Objects
+
+- No identity
+- Immutable: Better encapsulation
+
+
+
+
+
+
+
+
+
 
 
 
